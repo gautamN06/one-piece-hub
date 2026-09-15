@@ -1,6 +1,13 @@
-using OnePieceApi.Models; 
+using Microsoft.EntityFrameworkCore;
+using OnePieceApi.Data;
+using OnePieceApi.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<OnePieceDbContext>(options => 
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddOpenApi();
 
